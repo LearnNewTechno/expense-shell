@@ -28,7 +28,7 @@ ROOT_USER()
         fi
 }
 
-VALIDATE_PACKAGE()
+VALIDATE()
 {
         if [ $1 -ne 0 ]
         then
@@ -43,20 +43,20 @@ ROOT_USER
 
 
 dnf module disable nodejs -y &>> $LOG_FILE
-VALIDATE_PACKAGE $? "Disabling default NodeJs"
+VALIDATE $? "Disabling default NodeJs"
 
 dnf module enable nodejs:20 -y &>> $LOG_FILE
-VALIDATE_PACKAGE $? "Enabling nodejs"
+VALIDATE $? "Enabling nodejs"
 
 dnf install nodejs -y &>> $LOG_FILE
-VALIDATE_PACKAGE $? "Installed Node js 20"
+VALIDATE $? "Installed Node js 20"
 
 id expense &>> $LOG_FILE
 if [ $? -ne 0 ]
 then
     echo "Expense user not exists.. $G Creating $N"
-    useradd expense
-    echo "Created expense user"
+    useradd expense &>> $LOG_FILE
+    VALIDATE $?  "Created expense user"
 else 
     echo -e "Expense user aready exits.. $Y Skipping $N"
 fi
