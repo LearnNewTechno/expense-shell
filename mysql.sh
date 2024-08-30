@@ -23,7 +23,7 @@ ROOT_USER()
 {
         if [ $USER -ne 0 ]
         then
-                echo "please user root user " | tee -a $LOG_FILE
+                echo -e " $R please run this script with root user " | tee -a $LOG_FILE
                 exit 1
         fi
 }
