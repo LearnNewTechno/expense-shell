@@ -54,7 +54,7 @@ mysql -h 34.201.160.152 -u root -p ExpenseApp@1 -e 'show databases;' &>> $LOG_FI
 if [ $? -ne 0 ]
 then 
     echo "My Sql server root password is not set up" &>> $LOG_FILE
-    mysql_secure_installation --set-root-pass EpenseApp@1 &>> $LOG_FILE
+    mysql_secure_installation --set-root-pass ExpenseApp@1 &>> $LOG_FILE
     VALIDATE_PACKAGE $? "Setting Up root Password"  
 else 
     echo -e "MySQL root password is already setup...$Y SKIPPING $N" | tee -a $LOG_FILE
