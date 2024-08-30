@@ -50,7 +50,7 @@ VALIDATE_PACKAGE $? "Enabled MySql Serveer"
 systemctl start mysqld | tee -a $LOG_FILE
 VALIDATE_PACKAGE $? "Started MySql Serveer"
 
-mysql -h 172.31.36.214 -u root -pExpenseApp@1 -e 'show databases;' &>> $LOG_FILE
+mysql -h mysql.ravijavadevops.site -u root -pExpenseApp@1 -e 'show databases;' &>> $LOG_FILE
 if [ $? -ne 0 ]
 then 
     echo "My Sql server root password is not set up" &>> $LOG_FILE
