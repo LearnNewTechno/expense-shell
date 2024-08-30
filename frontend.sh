@@ -51,6 +51,7 @@ systemctl start nginx &>> $LOG_FILE
 VALIDATE $? "Start NGINX"
 
 rm -rf /usr/share/nginx/html/* &>> $LOG_FILE
+VALIDATE $? "Removing default weg site"
 
 curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip  &>> $LOG_FILE
 VALIDATE $? "Downloadin front end code"
@@ -59,3 +60,6 @@ cd /usr/share/nginx/html
 unzip /tmp/frontend.zip  &>> $LOG_FILE
 VALIDATE $? "Extract front End code"
 
+cp  /home/ec2-user/expense-shell/expense.config /etc/nginx/default.d/expense.conf
+
+systemctl restart nginx
