@@ -51,5 +51,14 @@ VALIDATE_PACKAGE $? "Enabled nodejs"
 dnf install nodejs -y &>> $LOG_FILE
 VALIDATE_PACKAGE $? "Installed Node js 20"
 
-useradd expense
+id expense &>> $LOG_FILE
+if [ $? -ne 0 ]
+then
+    echo "Expense user not exists.. $G Creating $N"
+    useradd expense
+    echo "Created expense user"
+else 
+    echo -e "Expense user aready exits.. $Y Skipping $N"
+fi
+
 
