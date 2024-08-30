@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # echo "$@"
-LOG_FOLDER="/var/log/shell-script"
+LOG_FOLDER="/var/log/expense"
 FILE_NAME=$(echo $0 | cut -d "." -f1)
 TIMESTAMP=$(date +%F_%H_%M_%S)
 LOG_FILE="$LOG_FOLDER/$FILE_NAME-$TIMESTAMP.log"
