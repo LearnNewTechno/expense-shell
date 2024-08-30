@@ -72,3 +72,21 @@ rm -rf /app/*
 unzip /tmp/backend.zip &>> $LOG_FILE
 VALIDATE $? "Extraxcting backend application code"
 
+npm install &>> $LOG_FILE
+
+
+cp  /home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service
+
+dnf install mysql -y  &>> $LOG_FILE
+
+mysql -h mysql.ravijavadevops.site -uroot -pExpenseApp@1 < /app/schema/backend.sql  &>> $LOG_FILE
+VALIDATE $? "Schema loading"
+
+systemctl daemon-reload &>> $LOG_FILE
+VALIDATE $? "Daemon Reload"
+
+systemctl enable backend  &>> $LOG_FILE
+VALIDATE $? "Enable Backend"
+
+systemctl restart backend  &>> $LOG_FILE
+VALIDATE $? "Restart Backend"
