@@ -46,19 +46,29 @@ dnf module disable nodejs -y &>> $LOG_FILE
 VALIDATE $? "Disabling default NodeJs"
 
 dnf module enable nodejs:20 -y &>> $LOG_FILE
-VALIDATE $? "Enabling nodejs"
+VALIDATE $? "Enabling nodejs:20"
 
 dnf install nodejs -y &>> $LOG_FILE
-VALIDATE $? "Installed Node js 20"
+VALIDATE $? "Installed NodeJs:20"
 
 id expense &>> $LOG_FILE
 if [ $? -ne 0 ]
 then
-    echo "Expense user not exists.. $G Creating $N"
+    echo -e "Expense user not exists.. $G Creating $N"
     useradd expense &>> $LOG_FILE
     VALIDATE $?  "Created expense user"
 else 
     echo -e "Expense user aready exits.. $Y Skipping $N"
 fi
 
+mkdir -p /app
+VALIDATE $? "Creating /app folder"
+
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>> $LOG_FILE
+VALIDATE $? "Downloading backend application code"
+
+cd /app
+rm -rf /app/*
+unzip /tmp/backend.zip &>> $LOG_FILE
+VALIDATE $? "Extraxcting backend application code"
 
