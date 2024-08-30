@@ -43,10 +43,10 @@ ROOT_USER
 
 
 dnf module disable nodejs -y &>> $LOG_FILE
-VALIDATE_PACKAGE $? "Installing MySql Serveer"
+VALIDATE_PACKAGE $? "Disabling default NodeJs"
 
 dnf module enable nodejs:20 -y &>> $LOG_FILE
-VALIDATE_PACKAGE $? "Enabled nodejs"
+VALIDATE_PACKAGE $? "Enabling nodejs"
 
 dnf install nodejs -y &>> $LOG_FILE
 VALIDATE_PACKAGE $? "Installed Node js 20"
